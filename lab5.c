@@ -14,7 +14,7 @@ int main(){
     scanf("%d", &N);
     Stack MyStack;
     MyStack.TopOfStack = 0;
-    double arr[15] = {9.3, 1.0, 7.8, 8.4, 3.9, 6.8, 9.0, 1.8, 5.4, 1.4, 3.9, 8.1, 0.9, 5.3, 1.6};
+    double arr[15] = {9.3, 1.0, 7.8, 8.4, 3.9, 6.8, 9.0, 1.8, 5.4, 1.4, 3.9, 8.1, 1.9, 5.3, 1.6};
     
     for (int i = 0; i < N; i++){
         if (MyStack.TopOfStack < SizeOfStack){
@@ -32,7 +32,6 @@ int main(){
             minIndex = i;
         }
     }
-    printf("Minimum element: %lf at index %d\n", min, minIndex);
 
     printf("Current size of the stack is %d.\n", MyStack.TopOfStack);
     for (int i = 0; i < MyStack.TopOfStack; i++){
@@ -42,12 +41,10 @@ int main(){
     printf("\nEnter how many elements you want to delete: ");
     scanf("%d", &M);
 
-    int deletions = M >= minIndex ? minIndex : M;
-    
-    for (int i = deletions; i < MyStack.TopOfStack; i++) {
-        MyStack.elements[i - deletions] = MyStack.elements[i];
+    while (M > 0 && MyStack.TopOfStack - 1 > minIndex) {
+        MyStack.TopOfStack--;
+        M--;
     }
-    MyStack.TopOfStack -= deletions;
 
     printf("Current size of the stack is %d.\n", MyStack.TopOfStack);
     for (int i = 0; i < MyStack.TopOfStack; i++){
