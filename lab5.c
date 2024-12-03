@@ -3,7 +3,6 @@
 
 int main(){
     const int SizeOfStack = 15;
-    
     typedef struct{
         double elements[SizeOfStack];
         int TopOfStack;
@@ -34,9 +33,7 @@ int main(){
             minIndex = MyStack.TopOfStack;
         }
     }
-
-    MyStack.TopOfStack = originalTop;
-    
+    MyStack.TopOfStack = originalTop;  
     printf("Enter how many elements you want to delete: ");
     scanf("%d", &M);
 
@@ -44,6 +41,5 @@ int main(){
         MyStack.TopOfStack--;
         M--;
     }
-
     return 0;
 }
