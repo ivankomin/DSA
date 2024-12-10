@@ -38,30 +38,29 @@ int main(){
     int l = 0;
     int r = n - 1;
     int mid = 0;
-
+   
     while (l < r) {
         mid = (l + r) / 2;
         if (arr3[mid] > arr3[r]) {
-            l = mid + 1;
+            l = mid + 1;  
         } else {
-            r = mid;
+            r = mid;    
         }
     }
     char minBin = arr3[l];
 
     l = 0;
     r = n - 1;
-
     while (l < r) {
         mid = (l + r) / 2;
         if (arr3[mid] < arr3[r]) {
             l = mid + 1;
         } else {
-            r = mid;
+            r = mid;;
         }
     }
     char maxBin = arr3[l];
-    
+    ;
     printf("Min (binary): %c\n", minBin);
     printf("Max (binary): %c\n", maxBin);
     printf("Sum (binary): %d\n", maxBin + minBin);
