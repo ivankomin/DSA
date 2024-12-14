@@ -3,41 +3,65 @@
 #define SIZE 6
 
 int main() {
-    int matrix[SIZE][SIZE] = {0}; // Ініціалізація матриці
-    int value = 1; // Значення для заповнення матриці
+    // Initial matrix (matrix1)
+    int matrix1[SIZE][SIZE] = {
+        {1, 2, 3, 4, 5, 6},
+        {7, 8, 9, 10, 11, 12},
+        {13, 14, 15, 16, 17, 18},
+        {1, 2, 3, 4, 5, 6},
+        {7, 8, 9, 10, 11, 12},
+        {13, 14, 15, 16, 17, 18}
+    };
 
-    // Верхня половина (рух змійкою зверху вниз)
+    // Resulting matrix (matrix2)
+    int matrix2[SIZE][SIZE] = {0};
+
+    int index = 0;
+
+    // Upper half of the traversal (top to middle)
     for (int i = 0; i < SIZE / 2; i++) {
-        if (i % 2 == 0) { // Рядки з індексом 0, 2: справа наліво
+        if (i % 2 == 0) { // Even rows: right-to-left
             for (int j = SIZE - 1; j >= 0; j--) {
-                matrix[i][j] = value++;
+                matrix2[i][j] = matrix1[index / SIZE][index % SIZE];
+                index++;
             }
-        } else { // Рядки з індексом 1: зліва направо
+        } else { // Odd rows: left-to-right
             for (int j = 0; j < SIZE; j++) {
-                matrix[i][j] = value++;
+                matrix2[i][j] = matrix1[index / SIZE][index % SIZE];
+                index++;
             }
         }
     }
 
-    // Нижня половина (рух змійкою знизу вгору)
-    value = SIZE * SIZE; // Початкове значення для нижньої частини
+    // Lower half of the traversal (bottom to middle)
     for (int i = SIZE - 1; i >= SIZE / 2; i--) {
-        if ((SIZE - 1 - i) % 2 == 0) { // Рядки з індексом 5, 3: зліва направо
+        if ((SIZE - 1 - i) % 2 == 0) { // Even reverse rows: bottom-to-top, left-to-right
             for (int j = 0; j < SIZE; j++) {
-                matrix[i][j] = value--;
+                matrix2[i][j] = matrix1[index / SIZE][index % SIZE];
+                index++;
             }
-        } else { // Рядок з індексом 4: справа наліво
+        } else { // Odd reverse rows: bottom-to-top, right-to-left
             for (int j = SIZE - 1; j >= 0; j--) {
-                matrix[i][j] = value--;
+                matrix2[i][j] = matrix1[index / SIZE][index % SIZE];
+                index++;
             }
         }
     }
 
-    // Виведення матриці
-    printf("Заповнена матриця:\n");
+    // Print the initial matrix (matrix1)
+    printf("Initial matrix (matrix1):\n");
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            printf("%3d ", matrix[i][j]);
+            printf("%4d", matrix1[i][j]);
+        }
+        printf("\n");
+    }
+
+    // Print the resulting matrix (matrix2)
+    printf("\nResulting matrix (matrix2):\n");
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            printf("%4d", matrix2[i][j]);
         }
         printf("\n");
     }
