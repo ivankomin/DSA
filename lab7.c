@@ -1,23 +1,61 @@
 #include <stdio.h>
-
 #define SIZE 6
 
+void traverseMatrix(int matrix1[SIZE][SIZE], int matrix2[SIZE][SIZE]);
+void bubbleSort(int arr[], int size);
 int main() {
-    // Initial matrix (matrix1)
     int matrix1[SIZE][SIZE] = {
     {12, -5, 19, -10, 7, -2},
     {-8, 14, -3, 0, 16, -11},
     {5, -20, 9, 8, -6, 13},
-    {-12, 15, 4, -7, 1, -18},
+    {-12, 15, 4, -7, 1, 18},
     {20, -9, 3, 11, -4, 6},
     {-19, 2, -15, 10, -1, 17}
 };
-
-    // Resulting matrix (matrix2)
     int matrix2[SIZE][SIZE] = {0};
+    int arr[SIZE] = {0};
+    int k = 0;
+    traverseMatrix(matrix1, matrix2);
 
-    int index = 0;
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            if (i == j && matrix2[i][j] > 0) {
+                arr[k] = matrix2[i][j];
+                k++;
+            }
+        }
+    }
 
+    printf("\nInitial matrix (matrix1):\n");
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            printf("%4d", matrix1[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\nResulting matrix (matrix2):\n");
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            printf("%4d", matrix2[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\nArray: ");
+    for (int i = 0; i < k; i++) {
+        printf("%d ", arr[i]);
+    }  
+    bubbleSort(arr, k);
+    printf("\nSorted array: ");
+    for (int i = 0; i < k; i++) {
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}
+
+void traverseMatrix(int matrix1[SIZE][SIZE], int matrix2[SIZE][SIZE]) {
+     int index = 0;
     // Upper half of the traversal (top to middle)
     for (int i = 0; i < SIZE / 2; i++) {
         if (i % 2 == 0) { // Even rows: right-to-left
@@ -47,24 +85,16 @@ int main() {
             }
         }
     }
+}
 
-    // Print the initial matrix (matrix1)
-    printf("Initial matrix (matrix1):\n");
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            printf("%4d", matrix1[i][j]);
+void bubbleSort(int arr[], int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
         }
-        printf("\n");
     }
-
-    // Print the resulting matrix (matrix2)
-    printf("\nResulting matrix (matrix2):\n");
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            printf("%4d", matrix2[i][j]);
-        }
-        printf("\n");
-    }
-
-    return 0;
 }
